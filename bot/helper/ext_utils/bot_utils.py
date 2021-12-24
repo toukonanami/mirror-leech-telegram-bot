@@ -101,11 +101,11 @@ def getAllDownload():
     return None
 
 def get_progress_bar_string(status):
-    completed = status.processed_bytes() / 10
-    total = status.size_raw() / 10
+    completed = status.processed_bytes() / 6
+    total = status.size_raw() / 6
     p = 0 if total == 0 else round(completed * 100 / total)
     p = min(max(p, 0), 100)
-    cFull = p // 10
+    cFull = p // 6
     p_str = '●' * cFull
     p_str += '○' * (14 - cFull)
     p_str = f"[{p_str}]"
@@ -159,7 +159,7 @@ def get_readable_message():
                 msg += f" | <b>Uploaded: </b>{get_readable_file_size(download.torrent_info().uploaded)}"
                 msg += f"\n<b>Ratio: </b>{round(download.torrent_info().ratio, 3)}"
                 msg += f" | <b>Time: </b>{get_readable_time(download.torrent_info().seeding_time)}"
-                msg += f"\n<code>/{BotCommands.CancelMirror} {download.gid()}</code>"
+                msg += f"\n<b>To Stop:</b> <code>/{BotCommands.CancelMirror} {download.gid()}</code>"
             else:
                 msg += f"\n<b>Size: </b>{download.size()}"
             msg += "\n\n"
